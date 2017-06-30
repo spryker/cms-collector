@@ -7,16 +7,16 @@
 
 namespace Spryker\Zed\CmsCollector\Dependency\Facade;
 
-class CmsCollectorToCmsBridge implements CmsCollectorToCmsInterface
+class CmsCollectorToCmsContentWidgetBridge implements CmsCollectorToCmsContentWidgetInterface
 {
 
     /**
-     * @var \Spryker\Zed\Cms\Business\CmsFacadeInterface
+     * @var \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetFacadeInterface
      */
     protected $cmsFacade;
 
     /**
-     * @param \Spryker\Zed\Cms\Business\CmsFacadeInterface $cmsFacade
+     * @param \Spryker\Zed\CmsContentWidget\Business\CmsContentWidgetFacadeInterface $cmsFacade
      */
     public function __construct($cmsFacade)
     {

@@ -7,7 +7,7 @@
 
 namespace Spryker\Zed\CmsCollector\Dependency\Facade;
 
-interface CmsCollectorToCmsInterface
+interface CmsCollectorToCmsContentWidgetInterface
 {
 
     /**
