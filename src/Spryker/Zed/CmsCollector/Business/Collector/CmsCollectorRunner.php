@@ -5,62 +5,41 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\CmsCollector\Business;
+namespace Spryker\Zed\CmsCollector\Business\Collector;
 
 use Generated\Shared\Transfer\LocaleTransfer;
 use Orm\Zed\Touch\Persistence\SpyTouchQuery;
+use Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToCollectorInterface;
+use Spryker\Zed\Collector\Business\Collector\DatabaseCollectorInterface;
 use Spryker\Zed\Collector\Business\Exporter\Reader\ReaderInterface;
 use Spryker\Zed\Collector\Business\Exporter\Writer\TouchUpdaterInterface;
 use Spryker\Zed\Collector\Business\Exporter\Writer\WriterInterface;
 use Spryker\Zed\Collector\Business\Model\BatchResultInterface;
-use Spryker\Zed\Kernel\Business\AbstractFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @method \Spryker\Zed\CmsCollector\Business\CmsCollectorBusinessFactory getFactory()
- */
-class CmsCollectorFacade extends AbstractFacade implements CmsCollectorFacadeInterface
+class CmsCollectorRunner implements CmsCollectorRunnerInterface
 {
     /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Orm\Zed\Touch\Persistence\SpyTouchQuery $baseQuery
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     * @param \Spryker\Zed\Collector\Business\Model\BatchResultInterface $result
-     * @param \Spryker\Zed\Collector\Business\Exporter\Reader\ReaderInterface $dataReader
-     * @param \Spryker\Zed\Collector\Business\Exporter\Writer\WriterInterface $dataWriter
-     * @param \Spryker\Zed\Collector\Business\Exporter\Writer\TouchUpdaterInterface $touchUpdater
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return void
+     * @var \Spryker\Zed\Collector\Business\Collector\DatabaseCollectorInterface
      */
-    public function runStorageCmsVersionPageCollector(
-        SpyTouchQuery $baseQuery,
-        LocaleTransfer $localeTransfer,
-        BatchResultInterface $result,
-        ReaderInterface $dataReader,
-        WriterInterface $dataWriter,
-        TouchUpdaterInterface $touchUpdater,
-        OutputInterface $output
-    ) {
-        $this->getFactory()->createStorageCmsVersionPageCollectorRunner()->run(
-            $baseQuery,
-            $localeTransfer,
-            $result,
-            $dataReader,
-            $dataWriter,
-            $touchUpdater,
-            $output
-        );
+    protected $collector;
+
+    /**
+     * @var \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToCollectorInterface
+     */
+    protected $collectorFacade;
+
+    /**
+     * @param \Spryker\Zed\Collector\Business\Collector\DatabaseCollectorInterface $collector
+     * @param \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToCollectorInterface $collectorFacade
+     */
+    public function __construct(DatabaseCollectorInterface $collector, CmsCollectorToCollectorInterface $collectorFacade)
+    {
+        $this->collector = $collector;
+        $this->collectorFacade = $collectorFacade;
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
      * @param \Orm\Zed\Touch\Persistence\SpyTouchQuery $baseQuery
      * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param \Spryker\Zed\Collector\Business\Model\BatchResultInterface $result
@@ -71,7 +50,7 @@ class CmsCollectorFacade extends AbstractFacade implements CmsCollectorFacadeInt
      *
      * @return void
      */
-    public function runSearchCmsVersionPageCollector(
+    public function run(
         SpyTouchQuery $baseQuery,
         LocaleTransfer $localeTransfer,
         BatchResultInterface $result,
@@ -79,8 +58,9 @@ class CmsCollectorFacade extends AbstractFacade implements CmsCollectorFacadeInt
         WriterInterface $dataWriter,
         TouchUpdaterInterface $touchUpdater,
         OutputInterface $output
-    ) {
-        $this->getFactory()->createSearchCmsVersionPageCollectorRunner()->run(
+    ): void {
+        $this->collectorFacade->runCollector(
+            $this->collector,
             $baseQuery,
             $localeTransfer,
             $result,
