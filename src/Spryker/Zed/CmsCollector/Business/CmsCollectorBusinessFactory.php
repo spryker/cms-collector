@@ -96,9 +96,6 @@ class CmsCollectorBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CmsCollectorDependencyProvider::FACADE_SEARCH);
     }
 
-    /**
-     * @return \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToStoreFacadeInterface
-     */
     public function getStoreFacade(): CmsCollectorToStoreFacadeInterface
     {
         return $this->getProvidedDependency(CmsCollectorDependencyProvider::FACADE_STORE);
@@ -128,9 +125,6 @@ class CmsCollectorBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CmsCollectorDependencyProvider::FACADE_CMS);
     }
 
-    /**
-     * @return \Spryker\Zed\CmsCollector\Business\Collector\CmsCollectorRunnerInterface
-     */
     public function createSearchCmsVersionPageCollectorRunner(): CmsCollectorRunnerInterface
     {
         return new CmsCollectorRunner(
@@ -139,9 +133,6 @@ class CmsCollectorBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CmsCollector\Business\Collector\CmsCollectorRunnerInterface
-     */
     public function createStorageCmsVersionPageCollectorRunner(): CmsCollectorRunnerInterface
     {
         return new CmsCollectorRunner(

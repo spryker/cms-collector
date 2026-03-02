@@ -26,11 +26,6 @@ class CmsVersionPageCollector extends AbstractSearchPropelCollector
      */
     protected $cmsDataPageMapBuilder;
 
-    /**
-     * @param \Spryker\Service\UtilDataReader\UtilDataReaderServiceInterface $utilDataReaderService
-     * @param \Spryker\Zed\Search\Dependency\Plugin\PageMapInterface $cmsDataPageMapBuilder
-     * @param \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToSearchInterface $searchFacade
-     */
     public function __construct(
         UtilDataReaderServiceInterface $utilDataReaderService,
         PageMapInterface $cmsDataPageMapBuilder,

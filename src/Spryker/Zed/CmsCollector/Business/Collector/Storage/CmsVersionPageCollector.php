@@ -20,10 +20,6 @@ class CmsVersionPageCollector extends AbstractStoragePropelCollector
      */
     protected $cmsFacade;
 
-    /**
-     * @param \Spryker\Service\UtilDataReader\UtilDataReaderServiceInterface $utilDataReaderService
-     * @param \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToCmsInterface $cmsFacade
-     */
     public function __construct(
         UtilDataReaderServiceInterface $utilDataReaderService,
         CmsCollectorToCmsInterface $cmsFacade

@@ -52,10 +52,6 @@ class CmsDataPageMapBuilder implements PageMapInterface
      */
     protected $storeFacade;
 
-    /**
-     * @param \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToCmsInterface $cmsFacade
-     * @param \Spryker\Zed\CmsCollector\Dependency\Facade\CmsCollectorToStoreFacadeInterface $storeFacade
-     */
     public function __construct(
         CmsCollectorToCmsInterface $cmsFacade,
         CmsCollectorToStoreFacadeInterface $storeFacade
